@@ -4,12 +4,25 @@
 
 var Parse = {
 
-  server: `https://app-hrsei-api.herokuapp.com/api/chatterbox/messages/${window.CAMPUS}`,
+  server: 'https://app-hrsei-api.herokuapp.com/api/chatterbox/messages/hr-rfp',
 
+  //post function
   create: function(message, successCB, errorCB = null) {
     // TODO: send a request to the Parse API to save the message
+    $.ajax({
+      url: Parse.server,
+      type: 'POST',
+      data: JSON.stringify(message),
+      contentType: 'application/json',
+      success: successCB,
+      error: errorCB || function(error) {
+        console.log('.create fail message: Failed to post messages', error);
+      }
+    });
   },
 
+  //get function
+  //if error cb was not given as an argument to the readAll function then by default sets it to null
   readAll: function(successCB, errorCB = null) {
     $.ajax({
       url: Parse.server,

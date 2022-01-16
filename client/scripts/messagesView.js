@@ -10,12 +10,25 @@ var MessagesView = {
     // when this view loads.
   },
 
-  render: function() {
-    // TODO: Render _all_ the messages.
+  render: function(messagesArr) {
+    //clear the previous html content of the chat element
+    MessagesView.$chats.html('');
+    // TODO: Render _all_ the messages
+    //iterate through the given messagesArr
+    messagesArr.forEach(message => { //100+
+      //render each messsage using render view
+      MessagesView.renderMessage(message);
+    });
   },
 
   renderMessage: function(message) {
     // TODO: Render a single message.
+    //generate a new message DOM element
+    //this is a DOM element wrapped in a jQuery element so use'$'
+    var $message = MessageView.render(message);
+    //append the message to the DOM
+    MessagesView.$chats.prepend($message);
+    // $('#title').appendTo()
   },
 
   handleClick: function(event) {
