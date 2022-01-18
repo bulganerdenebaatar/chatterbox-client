@@ -12,8 +12,8 @@ var Parse = {
     $.ajax({
       url: Parse.server,
       type: 'POST',
-      data: JSON.stringify(message),
-      contentType: 'application/json',
+      data: JSON.stringify(message), // format before sending to parse
+      contentType: 'application/json', //server is expecting
       success: successCB,
       error: errorCB || function(error) {
         console.log('.create fail message: Failed to post messages', error);

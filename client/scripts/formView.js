@@ -26,7 +26,7 @@ var FormView = {
 
     Parse.create(message, (data) => {
       Object.assign(message, data);
-      Messages.addTo(message);
+      Messages.addTo(message, MessagesView.render);
     }),
     console.log('click!');
   },

@@ -26,7 +26,7 @@ var App = {
   username: 'anonymous',
 
   initialize: function() {
-    App.username = window.location.search.substr(10);
+    App.username = window.location.search.substr(10); // upon initialization the user name will become
 
     FormView.initialize();
     RoomsView.initialize();
@@ -35,25 +35,27 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     //fetch all messages from server and ends spinner when done
-    App.fetch(App.stopSpinner);
+    App.fetch(App.stopSpinner); // fetch messages from the server
 
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
-    //set an interval to check for new data every 3 seconds
+    // set an interval to check for new data every 3 seconds
     setInterval(App.fetch, 3000);
   },
 
   fetch: function(callback = ()=>{}) {
-    Parse.readAll((data) => {
+    Parse.readAll((data) => { //use parse component to read msgs from the server
       // examine the response from the serve request:
       console.log(data);
 
       // TODO: Use the data to update Messages and Rooms and re-render the corresponding views
 
       //Update & re-Render Messages
-      Messages.retrieveFrom();
+      Messages.retrieveFrom(data, Messages.render);
+      Rooms.update(data, RoomsView.render);
       //re-render the messagesView
       MessagesView.render(Object.values(Messages._data));
+
       //an array containing all of the given objects values //the messsges
 
       //Update and re-Render Rooms

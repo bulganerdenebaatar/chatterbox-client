@@ -40,4 +40,10 @@ var Messages = {
   },
 
   //what if the message does not have a username, text or roomname property
+  conform: function(message) {
+    messages.text = message.text || '';
+    messages.username = message.username || '';
+    messages.roomname = message.roomname || '';
+    return message;
+  }
 };
